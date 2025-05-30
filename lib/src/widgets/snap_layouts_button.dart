@@ -9,31 +9,31 @@ class SnapLayoutsButton extends StatefulWidget {
   SnapLayoutsButton({
     super.key,
     this.brightness,
-    this.enabled = true,
-    this.onPressed,
     this.iconName,
+    this.onPressed,
+    this.enabled = true,
   });
 
   /// Creates a maximize button (standard Windows 11 snap layout button)
   SnapLayoutsButton.maximize({
     super.key,
     this.brightness,
-    this.enabled = true,
     this.onPressed,
+    this.enabled = true,
   }) : iconName = _kIconChromeMaximize;
 
   /// Creates an unmaximize/restore button (standard Windows 11 snap layout button)
   SnapLayoutsButton.unmaximize({
     super.key,
     this.brightness,
-    this.enabled = true,
     this.onPressed,
+    this.enabled = true,
   }) : iconName = _kIconChromeUnmaximize;
 
   final Brightness? brightness; // Theme brightness (light/dark)
-  final bool enabled; // Whether the button is interactive
-  final VoidCallback? onPressed; // Callback when button is clicked
   final String? iconName; // Name of the icon to display
+  final VoidCallback? onPressed; // Callback when button is clicked
+  final bool enabled; // Whether the button is interactive
 
   // Light theme color schemes
   final _ButtonBgColorScheme _lightButtonBgColorScheme = _ButtonBgColorScheme(
@@ -88,13 +88,11 @@ class _SnapLayoutsButtonState extends State<SnapLayoutsButton>
 
   /// Handles hover state changes
   void _onEntered({required bool hovered}) {
-    if (hovered == _isHovering) return;
     setState(() => _isHovering = hovered);
   }
 
   /// Handles press state changes
   void _onActive({required bool pressed}) {
-    if (pressed == _isPressed) return;
     setState(() => _isPressed = pressed);
   }
 
@@ -127,15 +125,13 @@ class _SnapLayoutsButtonState extends State<SnapLayoutsButton>
             ? widget._buttonIconColorScheme.normal
             : widget._buttonIconColorScheme.disabled;
 
-    if (widget.enabled) {
-      if (_isHovering) {
-        bgColor = widget._buttonBgColorScheme.hovered;
-        iconColor = widget._buttonIconColorScheme.hovered;
-      }
-      if (_isPressed) {
-        bgColor = widget._buttonBgColorScheme.pressed;
-        iconColor = widget._buttonIconColorScheme.pressed;
-      }
+    if (_isHovering && widget.enabled) {
+      bgColor = widget._buttonBgColorScheme.hovered;
+      iconColor = widget._buttonIconColorScheme.hovered;
+    }
+    if (_isPressed && widget.enabled) {
+      bgColor = widget._buttonBgColorScheme.pressed;
+      iconColor = widget._buttonIconColorScheme.pressed;
     }
 
     return Container(
@@ -176,7 +172,6 @@ class _SnapLayoutsButtonState extends State<SnapLayoutsButton>
 
   @override
   void onSnapLayoutsLocate() {
-    if (!widget.enabled) return;
     // Update button position after slight delay to allow for animations
     Future.delayed(const Duration(milliseconds: 50), () {
       final rect = _getSnapLayoutsRect();

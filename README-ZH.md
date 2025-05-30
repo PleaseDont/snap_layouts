@@ -39,8 +39,8 @@ flutter pub add window_manager
 
 ```yaml
 dependencies:
-  snap_layouts: ^0.1.0
-  window_manager: ^0.4.3
+  snap_layouts: ^0.2.0
+  window_manager: ^0.5.0
 ```
 
 ### 使用
