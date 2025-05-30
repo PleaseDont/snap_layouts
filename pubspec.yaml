@@ -1,6 +1,6 @@
 name: snap_layouts
 description: "A plugin provides a simple window layout button which can implement the native Windows 11 Snap Layouts feature."
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/PleaseDont/snap_layouts
 
 platforms:
